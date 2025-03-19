@@ -1,0 +1,54 @@
+{
+  "pages": [
+    "pages/Default/Index/Default_Index",
+    "pages/Counseling/Index/Counseling_Index",
+    "pages/User/Index/User_Index",
+    "pages/User/Login/Login",
+    "pages/User/Information/Information",
+    "pages/User/Register/Register",
+    "pages/User/ResetPassword/ResetPassword",
+    "pages/User/CounselingRecord/CounselingRecord",
+    "pages/Default/QuizMain/QuizMain",
+    "pages/Default/Quiz/Quiz",
+    "pages/User/AccountSettingMain/AccountSettingMain",
+    "pages/Default/InquireSchedule/InquireSchedule"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "CCB心理咨询平台",
+    "navigationBarBackgroundColor": "#ffffff"
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userProfile": {
+      "desc": "用于完善会员资料"
+    }
+  },
+  "tabBar": {
+    "color": "#707070",
+    "selectedColor": "#1296db",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/Default/Index/Default_Index",
+        "iconPath": "/images/首页.png",
+        "selectedIconPath": "/images/首页.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/Counseling/Index/Counseling_Index",
+        "iconPath": "/images/咨询.png",
+        "selectedIconPath": "/images/咨询.png",
+        "text": "咨询"
+      },
+      {
+        "pagePath": "pages/User/Index/User_Index",
+        "iconPath": "/images/用户.png",
+        "selectedIconPath": "/images/用户.png",
+        "text": "我的"
+      }
+    ]
+  }
+}

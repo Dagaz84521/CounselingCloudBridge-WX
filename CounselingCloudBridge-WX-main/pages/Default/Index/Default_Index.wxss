@@ -1,0 +1,161 @@
+/* pages/index/index.wxss */
+.container {
+  padding: 20rpx;
+}
+
+/* 功能按钮区域 */
+.button-group {
+  display: flex;
+  justify-content: space-around;
+  margin: 30rpx 0;
+}
+
+.function-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200rpx;
+}
+
+.btn-icon {
+  width: 100rpx;
+  height: 100rpx;
+  margin-bottom: 15rpx;
+}
+
+/* 推荐咨询师区域 */
+.therapist-list {
+  display: block; /* 确保为块级布局 */
+  width: 100%;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.therapist-card {
+  display: flex;       /* 保持flex布局 */
+  flex-direction: row; /* 内部横向排列 */
+  width: 100% !important; /* 强制宽度 */
+  margin-bottom: 30rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
+  padding: 30rpx;
+  box-sizing: border-box;
+  overflow: hidden;   /* 防止内容溢出 */
+}
+
+/* 确保没有残留的横向布局样式 */
+.therapist-card {
+  float: none !important;
+  display: flex !important;
+  inline-size: auto !important;
+  position: relative;
+  padding-bottom: 40rpx; /* 为状态图标留出空间 */
+}
+.avatar {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+  flex-shrink: 0; /* 防止图片被压缩 */
+}
+
+.info {
+  flex: 1;
+  height: 200rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 新增预约按钮样式 */
+.book-btn {
+  width: 200rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  background: #4a90e2;
+  color: white;
+  font-size: 26rpx;
+  border-radius: 40rpx;
+  margin-top: 20rpx;
+  align-self: flex-end;
+}
+
+/* 咨询师列表 */
+.therapist-list {
+  white-space: nowrap;
+  padding: 20rpx 0;
+}
+
+.therapist-card {
+  display: inline-flex;
+  width: 600rpx;
+  height: 300rpx;
+  margin-right: 30rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
+  padding: 30rpx;
+}
+
+.avatar {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+}
+
+.info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.name-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.name {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.rating {
+  color: #f7b500;
+}
+
+.expertise {
+  color: #666;
+  font-size: 28rpx;
+  margin-bottom: 15rpx;
+}
+
+.experience {
+  color: #999;
+  font-size: 24rpx;
+}
+
+.more {
+  color: #666;
+  font-size: 28rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 40rpx 0 20rpx;
+  padding: 0 20rpx;
+}
+
+.status-icon {
+  position: absolute;
+  right: 40rpx;
+  bottom: 40rpx;
+  width: 60rpx;
+  height: 60rpx;
+  z-index: 10;
+}
