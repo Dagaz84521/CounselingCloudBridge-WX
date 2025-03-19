@@ -4,7 +4,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isLoggedIn:false,
+    isLoggedIn:true,
     UserName:"测试用户"
   },
 
@@ -72,6 +72,16 @@ Page({
   handleTapInformation(){
     wx.navigateTo({
       url: '/pages/User/Information/Information'
+    })
+  },
+  handleTapRecord(){
+    wx.navigateTo({
+      url: '/pages/User/CounselingRecord/CounselingRecord'
+    })
+  },
+  handleTapSetting(){
+    wx.navigateTo({
+      url: '/pages/User/AccountSettingMain/AccountSettingMain'
     })
   }
 })

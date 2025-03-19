@@ -2,7 +2,7 @@
 <view class="container">
   <!-- 功能按钮区域 -->
   <view class="button-group">
-    <view class="function-btn" bindtap="navToSelfTest">
+    <view class="function-btn" bindtap="navToQuiz">
       <image src="/icons/问卷.png" class="btn-icon"></image>
       <text>心理自测</text>
     </view>
@@ -10,7 +10,8 @@
       <image src="/icons/机器人.png" class="btn-icon"></image>
       <text>AI对话</text>
     </view>
-    <view class="function-btn" bindtap="navToBooking">
+
+    <view class="function-btn" bindtap="navToInquireSchedule">
       <image src="/icons/预约.png" class="btn-icon"></image>
       <text>查询排班</text>
     </view>

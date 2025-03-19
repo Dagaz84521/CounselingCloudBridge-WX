@@ -22,9 +22,19 @@ Page({
     }]
   },
 
-  navToSelfTest() {},
+
+  navToQuiz() {
+    wx.navigateTo({
+      url: '/pages/Default/QuizMain/QuizMain',
+    })
+  },
   navToAIChat() {},
-  navToBooking() {},
+  navToInquireSchedule() {
+    wx.navigateTo({
+      url: '/pages/Default/InquireSchedule/InquireSchedule',
+    })
+  },
+
 
 
   /**

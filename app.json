@@ -7,8 +7,11 @@
     "pages/User/Information/Information",
     "pages/User/Register/Register",
     "pages/User/ResetPassword/ResetPassword",
+    "pages/User/CounselingRecord/CounselingRecord",
     "pages/Default/QuizMain/QuizMain",
-    "pages/Default/Quiz/Quiz"
+    "pages/Default/Quiz/Quiz",
+    "pages/User/AccountSettingMain/AccountSettingMain",
+    "pages/Default/InquireSchedule/InquireSchedule"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -48,4 +51,3 @@
       }
     ]
   }
-}

@@ -17,12 +17,12 @@
 
   <!-- 功能列表 -->
   <view class="function-list">
-    <view class="function-item">
+    <view class="function-item" bindtap="handleTapRecord">
       <image class="item-icon" src="/icons/首页.png"></image>
       <text>咨询记录</text>
       <image class="arrow" src="/icons/rightArrow.png"></image>
     </view>
-    <view class="function-item">
+    <view class="function-item" bindtap="handleTapSetting">
       <image class="item-icon" src="/icons/设置.png"></image>
       <text>账号设置</text>
       <image class="arrow" src="/icons/rightArrow.png"></image>
