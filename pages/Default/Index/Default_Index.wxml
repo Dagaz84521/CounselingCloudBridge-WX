@@ -1,0 +1,45 @@
+<!-- pages/index/index.wxml -->
+<view class="container">
+  <!-- 功能按钮区域 -->
+  <view class="button-group">
+    <view class="function-btn" bindtap="navToQuiz">
+      <image src="/icons/问卷.png" class="btn-icon"></image>
+      <text>心理自测</text>
+    </view>
+    <view class="function-btn" bindtap="navToAIChat">
+      <image src="/icons/机器人.png" class="btn-icon"></image>
+      <text>AI对话</text>
+    </view>
+    <view class="function-btn" bindtap="navToInquireSchedule">
+      <image src="/icons/预约.png" class="btn-icon"></image>
+      <text>查询排班</text>
+    </view>
+  </view>
+
+  <!-- 推荐咨询师 -->
+  <view class="recommend-section">
+    <view class="section-header">
+      <text class="section-title">推荐咨询师</text>
+      <text class="more">查看更多 ></text>
+    </view>
+
+    <!-- 纵向排列的列表 -->
+    <view class="therapist-list">
+      <block wx:for="{{therapists}}" wx:key="index">
+        <view class="therapist-card">
+          <image class="status-icon" src="{{item.isFree ? '/icons/空闲.png' : '/icons/忙碌.png'}}" wx:if="{{item.isFree !== undefined}}"></image>
+
+          <image src="{{item.avatar}}" class="avatar"></image>
+          <view class="info">
+            <view class="name-rating">
+              <text class="name">{{item.name}}</text>
+              <text class="rating">⭐{{item.rating}}</text>
+            </view>
+            <text class="expertise">{{item.expertise}}</text>
+            <text class="experience">{{item.experience}}年经验</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
