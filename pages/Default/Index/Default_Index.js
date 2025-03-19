@@ -22,6 +22,7 @@ Page({
     }]
   },
 
+
   navToQuiz() {
     wx.navigateTo({
       url: '/pages/Default/QuizMain/QuizMain',
@@ -33,6 +34,7 @@ Page({
       url: '/pages/Default/InquireSchedule/InquireSchedule',
     })
   },
+
 
 
   /**

@@ -10,6 +10,7 @@
       <image src="/icons/机器人.png" class="btn-icon"></image>
       <text>AI对话</text>
     </view>
+
     <view class="function-btn" bindtap="navToInquireSchedule">
       <image src="/icons/预约.png" class="btn-icon"></image>
       <text>查询排班</text>
