@@ -3,10 +3,10 @@
   <!-- 个人信息 -->
   <view class="list-item" bindtap="navigateToPersonalInfo">
     <view class="item-left">
-      <image class="item-icon" src="/images/icon-user.png"></image>
+      <image class="item-icon" src="/icons/用户.png"></image>
       <text>个人信息</text>
     </view>
-    <image class="arrow-right" src="/images/icon-arrow.png"></image>
+    <image class="arrow-right" src="/icons/rightArrow.png"></image>
   </view>
 
   <!-- 间隔区域 -->
@@ -15,7 +15,6 @@
   <!-- 退出登录 -->
   <view class="list-item logout" bindtap="showLogoutConfirm">
     <view class="item-left">
-      <image class="item-icon" src="/images/icon-logout.png"></image>
       <text>退出登录</text>
     </view>
   </view>
