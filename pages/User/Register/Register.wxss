@@ -36,6 +36,22 @@
   overflow: hidden;
 }
 
+.inputcode-container {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.inputcode-container input {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+  margin-right: 10px;
+}
+
 /* 输入框 */
 .input-container input {
   flex: 1;
@@ -46,17 +62,13 @@
 }
 
 /* 验证码相关样式 */
-.code-container {
-  position: relative;
-}
 
 .code-button {
-  padding: 10px;
+  padding: 12px;
   background-color: #07c160;
   border: none;
-  border-left: 1px solid #ddd;
   color: #f0f0f0;
-  font-size: 12px;
+  font-size: 14px;
   white-space: nowrap;
 }
 

@@ -20,8 +20,9 @@
     <!-- 验证码 -->
     <view class="form-card">
       <label class="form-label">验证码:</label>
-      <view class="input-container code-container">
+      <view class="inputcode-container">
         <input
+          class="input"
           name="code"
           placeholder="请输入验证码"
           type="number"
