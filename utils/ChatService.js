@@ -120,9 +120,23 @@ class ChatService {
     }, delay);
   }
 
+  formatDate(date, format = 'yyyy-MM-dd HH:mm:ss') {
+    const config = {
+      yyyy: date.getFullYear(),
+      MM: (date.getMonth() + 1).toString().padStart(2, '0'),
+      dd: date.getDate().toString().padStart(2, '0'),
+      HH: date.getHours().toString().padStart(2, '0'),
+      mm: date.getMinutes().toString().padStart(2, '0'),
+      ss: date.getSeconds().toString().padStart(2, '0'),
+    }
+  
+    return format.replace(/(yyyy|MM|dd|HH|mm|ss)/g, match => config[match])
+  }
+
   send(sessionId, receiverId, content, type) {
+    const now = new Date();
     const payload = {
-      messageId: sessionId,
+      roomId: sessionId,
       senderId: this.userId,
       receiverId,
       content,

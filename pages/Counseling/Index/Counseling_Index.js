@@ -28,7 +28,12 @@ Page({
       console.log('用户未登录')
       unLogin();
       return;
-    }
+    };
+    this.setData(
+      {
+        userId : wx.getStorageSync('userInfo').userId
+      }
+    )
     this.initChatService(userInfo.userId);
     await this.loadConsultantInfo();
     if(this.data.sessionId) { // 获取到sessionId后加载历史记录
@@ -39,6 +44,7 @@ Page({
 
     // 加载历史消息
   loadHistoryMessages() {
+    console.log('loadHistory');
     const token = wx.getStorageSync('token');
     const { sessionId } = this.data;
     
@@ -55,15 +61,16 @@ Page({
       success: (res) => {
         if (res.data.code === 1 && res.data.data) {
           const historyMessages = res.data.data.map(msg => ({
-            id: msg.id || Date.now().toString(),
+            id: sessionId,
             content: msg.content,
+            senderId: msg.senderId,
             isUser: msg.senderId === this.data.userId, // 根据senderId判断是否用户消息
             time: this.formatTime(new Date(msg.createdAt))
           }));
           
           // 按时间排序（假设后端返回的是倒序）
           const sortedMessages = historyMessages.reverse();
-          
+          console.log(sortedMessages);
           this.setData({
             messages: sortedMessages
           });
@@ -123,7 +130,6 @@ Page({
               counselorId: res.data.data.counselorId,
               sessionId: res.data.data.sessionId
             });
-            resolve(res.data.data); // 返回Promise用于异步等待
           }else{
             console.log("不存在会话")
             this.setData({
@@ -292,6 +298,7 @@ Page({
           wx.removeStorageSync('consultData');
           wx.showToast({ title: '咨询已结束' });
           // 强制更新页面状态
+          console.log('清除本地会话数据')
           this.setData({ 
             currentConsultant: null,
             messages: []
