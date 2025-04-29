@@ -228,3 +228,12 @@
   height: 100%;
   display: block;
 }
+
+.vertical-line{
+  width: 2px; /* 竖线的宽度 */
+  height: 80px; /* 竖线的高度，可根据实际需要调整 */
+  background-color: #d3d3d3; /* 灰色 */
+  margin: auto; /* 如果希望竖线居中，可以使用此属性 */
+  margin-left: 40px;
+  margin-right: 40px;
+}
