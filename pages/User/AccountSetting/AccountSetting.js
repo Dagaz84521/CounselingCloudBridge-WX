@@ -40,6 +40,7 @@ Page({
           wx.setStorageSync('userInfo', null)
           wx.setStorageSync('isLoggedIn', false)
           wx.setStorageSync('token', '')
+          wx.setStorageSync('phoneNumber', '')
           // 执行退出登录逻辑
           wx.switchTab({
             url: '/pages/Default/Index/Default_Index',
@@ -52,7 +53,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    const phoneNumber = wx.getStorageSync('phoneNumber');
+    this.setData({
+      phone: phoneNumber,
+    })
   },
 
   /**

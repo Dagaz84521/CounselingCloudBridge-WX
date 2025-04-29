@@ -68,7 +68,7 @@ Page({
       success: async (res) => {
         wx.hideLoading();
         this.setData({ isLoading: false });
-        
+        wx.setStorageSync('phoneNumber', this.data.phoneNumber);
         if (res.statusCode === 200) {
           if (res.data.code === 1) {
             // 登录成功

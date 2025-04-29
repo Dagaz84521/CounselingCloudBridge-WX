@@ -30,9 +30,55 @@ Page({
       return;
     }
     this.initChatService(userInfo.userId);
-    this.loadConsultantInfo();
+    await this.loadConsultantInfo();
+    if(this.data.sessionId) { // 获取到sessionId后加载历史记录
+      this.loadHistoryMessages();
+    }
     console.log('endOnShow');
   },
+
+    // 加载历史消息
+  loadHistoryMessages() {
+    const token = wx.getStorageSync('token');
+    const { sessionId } = this.data;
+    
+    wx.request({
+      url: host + '/api/client/session/history',
+      method: 'GET',
+      header: {
+        'token': token,
+        'content-type': 'application/json'
+      },
+      data: {
+        sessionId: sessionId
+      },
+      success: (res) => {
+        if (res.data.code === 1 && res.data.data) {
+          const historyMessages = res.data.data.map(msg => ({
+            id: msg.id || Date.now().toString(),
+            content: msg.content,
+            isUser: msg.senderId === this.data.userId, // 根据senderId判断是否用户消息
+            time: this.formatTime(new Date(msg.createdAt))
+          }));
+          
+          // 按时间排序（假设后端返回的是倒序）
+          const sortedMessages = historyMessages.reverse();
+          
+          this.setData({
+            messages: sortedMessages
+          });
+          this.scrollToBottom();
+        } else {
+          wx.showToast({ title: res.data.msg || '获取历史记录失败', icon: 'none' });
+        }
+      },
+      fail: (err) => {
+        console.error('获取历史记录失败:', err);
+        wx.showToast({ title: '网络异常，请重试', icon: 'none' });
+      }
+    });
+  },
+
 
   onHide(){
     console.log('onHide');
@@ -77,6 +123,7 @@ Page({
               counselorId: res.data.data.counselorId,
               sessionId: res.data.data.sessionId
             });
+            resolve(res.data.data); // 返回Promise用于异步等待
           }else{
             console.log("不存在会话")
             this.setData({
@@ -283,14 +330,13 @@ function unLogin() {
     content: '是否前往登录',
     complete: (res) => {
       if (res.cancel) {
-        wx.navigateTo({
-          url: '/pages/User/Login/Login',
-        })
-      }
-
-      if (res.confirm) {
         wx.switchTab({
           url: '/pages/Default/Index/Default_Index.js',
+        })
+      }
+      if (res.confirm) {
+        wx.navigateTo({
+          url: '/pages/User/Login/Login',
         })
       }
     }

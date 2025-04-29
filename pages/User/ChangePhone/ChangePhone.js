@@ -1,4 +1,5 @@
 // pages/User/ChangePhone/ChangePhone.js
+const host = getApp().globalData.host;
 Page({
 
   /**
@@ -22,17 +23,10 @@ Page({
 
   // 获取当前手机号
   getCurrentPhone: function() {
-    wx.request({
-      url: '', // 替换为你的接口地址
-      method: 'GET',
-      success: (res) => {
-        if (res.statusCode === 200) {
-          this.setData({
-            currentPhone: res.data.phone
-          });
-        }
-      }
-    });
+    const phoneNumber = wx.getStorageSync('phoneNumber');
+    this.setData({
+      currentPhone: phoneNumber,
+    })
   },
 
   // 监听手机号输入
@@ -133,10 +127,13 @@ Page({
 
     // 调用接口验证并修改手机号
     wx.request({
-      url: '', // 替换为你的接口地址
-      method: 'POST',
+      url: host + '/api/user/phoneNumber', // 替换为你的接口地址
+      method: 'PUT',
+      header:{
+        token: wx.getStorageSync('token')
+      },
       data: {
-        phone: newPhone,
+        phoneNumber: newPhone,
         code: verificationCode
       },
       success: (res) => {
@@ -145,9 +142,11 @@ Page({
             title: '手机号修改成功',
             icon: 'success'
           });
-
+          wx.setStorageSync('phoneNumber', newPhone);
           // 返回上一页
-          wx.navigateBack();
+          wx.switchTab({
+            url: '/pages/User/Index/User_Index',
+          })
         } else {
           wx.showToast({
             title: '修改失败，请检查验证码',
