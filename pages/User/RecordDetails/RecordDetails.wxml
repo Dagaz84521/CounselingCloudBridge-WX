@@ -1,2 +1,21 @@
 <!--pages/User/RecordDetails/RecordDetails.wxml-->
-<text>pages/User/RecordDetails/RecordDetails.wxml</text>
+<view class="container">
+  <!-- 咨询师信息区域 -->
+  <view class="consultant-info" wx:if="{{currentConsultant}}">
+    <image class="avatar" src="{{currentConsultant.avatarUrl}}"></image>
+    <view class="info">
+      <text class="name">{{currentConsultant.realName}}</text>
+      <!-- <text class="title">{{currentConsultant.title}}</text> -->
+    </view>
+  </view>
+
+  <!-- 聊天区域 -->
+  <scroll-view class="chat-container" scroll-y scroll-top="{{scrollTop}}">
+    <view wx:for="{{messages}}" wx:key="index" class="message-item">
+      <view class="message {{item.isUser ? 'user' : 'consultant'}}">
+        <text>{{item.content}}</text>
+        <text class="time">{{item.time}}</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>

@@ -1,1 +1,259 @@
 /* pages/User/RecordDetails/RecordDetails.wxss */
+  .container {
+    padding: 1rpx;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .consultant-info {
+    padding: 20rpx;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    border-bottom: 1rpx solid #eee;
+    /* 新增固定定位 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    /* 设置固定高度 */
+    height: 140rpx;
+
+  }
+
+  .avatar {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    margin-right: 20rpx;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .name {
+    font-size: 32rpx;
+    font-weight: bold;
+  }
+
+  .title {
+    font-size: 24rpx;
+    color: #666;
+  }
+
+  .no-consultant {
+    padding: 40rpx;
+    text-align: center;
+    color: #999;
+  }
+
+  .chat-container {
+    flex: 1;
+    padding: 20rpx;
+    background: #f5f5f5;
+    /* 新增间距补偿 */
+    margin-top: 140rpx;
+    /* 等于咨询师信息高度 */
+    margin-bottom: 110rpx;
+    /* 等于输入区域高度 */
+    /* 确保滚动容器高度正确 */
+    height: calc(100vh - 140rpx - 110rpx);
+    overflow-y: auto;
+  }
+
+  .message-item {
+    margin: 20rpx 0;
+    clear: both;
+    display: flow-root;
+  }
+
+  .message {
+    max-width: 70%;
+    min-width: 120rpx;
+    padding: 20rpx 20rpx 40rpx 20rpx;
+    /* 底部增加留白 */
+    border-radius: 10rpx;
+    position: relative;
+    padding-bottom: 40rpx;
+    /* 改为行内块级元素 */
+    display: block;
+    float: left;
+    /* 允许长单词换行 */
+    word-wrap: break-word;
+    /* 保留换行符 */
+    white-space: pre-wrap;
+  }
+
+  .message.consultant {
+    float: left;
+    background: white;
+    margin-right: 0;
+  }
+
+  .message.user {
+    float: right;
+    background: #95ec69;
+    margin-left: auto;
+  }
+
+  .time {
+    position: absolute;
+    right: 10rpx;
+    bottom: 10rpx;
+    font-size: 20rpx;
+    color: #666;
+    background: rgba(255, 255, 255, 0.7);
+    /* 添加半透明背景 */
+    padding: 0 8rpx;
+    border-radius: 4rpx;
+  }
+
+  .message.user .time {
+    right: auto;
+    left: 10rpx;
+  }
+
+  .input-area {
+    display: flex;
+    align-items: center;
+    padding: 20rpx;
+    background: #fff;
+    border-top: 1rpx solid #eee;
+    /* 新增固定定位 */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+
+  .input {
+    flex: 4;
+    /* 输入框占据4份空间 */
+    min-width: 0;
+    padding: 15rpx;
+    border: 1rpx solid #ddd;
+    border-radius: 50rpx;
+    margin-right: 15rpx;
+    /* 适当缩小右边距 */
+  }
+
+  .send-btn {
+    flex: 1;
+    /* 按钮占据1份空间 */
+    padding: 0 20rpx;
+    /* 缩小左右内边距 */
+    height: 70rpx;
+    line-height: 70rpx;
+    min-width: unset !important;
+    max-width: 150rpx;
+    /* 添加最大宽度限制 */
+    border-radius: 35rpx;
+    background: #07c160;
+    color: white;
+    font-size: 28rpx;
+  }
+
+  .end-btn {
+    /* 基础尺寸 */
+    height: 60rpx !important;
+    line-height: 60rpx !important;
+    min-width: 160rpx !important;
+
+    /* 文字样式 */
+    font-size: 24rpx !important;
+    padding: 0 20rpx !important;
+
+    /* 定位调整 */
+    position: absolute !important;
+    right: 20rpx;
+    top: 50%;
+    transform: translateY(-50%);
+
+    /* 视觉样式 */
+    border-radius: 30rpx;
+    background: #ff4d4f;
+    color: white;
+    border: none;
+  }
+
+  /* 确认弹窗样式 */
+  .confirm-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+  }
+
+  .modal-mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600rpx;
+    background: #fff;
+    border-radius: 16rpx;
+    padding: 40rpx;
+    text-align: center;
+  }
+
+  .modal-title {
+    font-size: 32rpx;
+    color: #333;
+    margin-bottom: 40rpx;
+    display: block;
+  }
+
+  .rating-container {
+    display: flex;
+    justify-content: center;
+    margin: 40rpx 0;
+  }
+
+  .star {
+    padding: 10rpx;
+  }
+
+  .star-icon {
+    width: 50rpx;
+    height: 50rpx;
+  }
+
+  .modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40rpx;
+  }
+
+  .btn-cancel,
+  .btn-confirm {
+    flex: 1;
+    margin: 0 20rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    border-radius: 8rpx;
+  }
+
+  .btn-cancel {
+    background: #f5f5f5;
+    color: #666;
+  }
+
+  .btn-confirm {
+    background: #07c160;
+    color: white;
+  }

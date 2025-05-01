@@ -116,7 +116,11 @@ Page({
 
   handleCardTap(e){
     const sessionId = e.currentTarget.dataset.id;
-    console.log(sessionId);
+    const counselorName = e.currentTarget.dataset.name;
+
+    wx.navigateTo({
+      url: '/pages/User/RecordDetails/RecordDetails?sessionId='+sessionId+'&realName='+counselorName,
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

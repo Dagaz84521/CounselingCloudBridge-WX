@@ -3,7 +3,7 @@
   <!-- 咨询记录列表 -->
   <view class="list">
     <block wx:for="{{consultationList}}" wx:key="id">
-      <view class="card" bindtap="handleCardTap" data-id="{{item.id}}">
+      <view class="card" bindtap="handleCardTap" data-id="{{item.id}}" data-name="{{item.name}}">
         <!-- 记录内容 -->
         <view class="card-content">
           <text class="name">{{item.name}}</text>
