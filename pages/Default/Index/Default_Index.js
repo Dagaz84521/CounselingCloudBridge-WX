@@ -37,7 +37,7 @@ Page({
           if (Array.isArray(res.data.data) && res.data.data.length > 0) {
             const therapists = res.data.data.map(item => ({
               id: item.counselorId,
-              avatar: '../../..' + item.avatarUrl || '/images/default-avatar.png',
+              avatar: item.avatarUrl || '/images/default-avatar.png',
               name: item.realName || '未知咨询师',
               rating: item.rating || 0,
               expertise: item.expertise ? '擅长：' + item.expertise : '专业领域待补充',

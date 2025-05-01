@@ -1,18 +1,36 @@
 // pages/User/CounselingRecord/CounselingRecord.js
+const host = getApp().globalData.host;
 Page({
   data: {
     consultationList: [] // 咨询记录列表
   },
 
   onLoad: function () {
-    // 模拟初始化数据
-    this.setData({
-      consultationList: [
-        { id: 1, name: '张三', date: '2023-10-01', description: '咨询内容1', checked: false },
-        { id: 2, name: '李四', date: '2023-10-02', description: '咨询内容2', checked: false },
-        { id: 3, name: '王五', date: '2023-10-03', description: '咨询内容3', checked: false }
-      ]
-    });
+    const thisUserId = wx.getStorageSync('userInfo').userId;
+    console.log('thisUserId', thisUserId);
+    wx.request({
+     
+      url: host + '/api/client/session/getAll',
+      method: 'POST',
+      header:{
+        token : wx.getStorageSync('token'),
+        'content-type': 'application/x-www-form-urlencoded' 
+      },
+      data:'userId=' + thisUserId,
+      success: (res) =>{
+        console.log('API响应', res.data);
+        if(res.data.code === 1){
+          const sessionList = res.data.data.map(item => ({
+            id: item.sessionId,
+            name: item.counselorName,
+            date: item.startTime
+          }));
+          this.setData({
+            consultationList: sessionList
+          });
+        }
+      },
+    })
   },
 
   // 切换勾选状态
@@ -94,6 +112,11 @@ Page({
         console.error('写入文件失败', err);
       }
     });
+  },
+
+  handleCardTap(e){
+    const sessionId = e.currentTarget.dataset.id;
+    console.log(sessionId);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

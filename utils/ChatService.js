@@ -58,7 +58,7 @@ class ChatService {
   _setupConnection() {
     // 1. 创建 WebSocket 连接
     this._socketTask = wx.connectSocket({
-      url: `ws://localhost:8080/chat/${this.userId}`,
+      url: `ws://60.204.220.253:8080/chat/${this.userId}`,
       success: () => {
         console.log("Socket 连接创建成功");
         this._bindEvents();

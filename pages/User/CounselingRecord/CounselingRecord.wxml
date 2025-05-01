@@ -1,23 +1,9 @@
 <!--pages/User/CounselingRecord/CounselingRecord.wxml-->
 <view class="container">
-  <!-- 操作按钮 -->
-  <view class="actions">
-    <button bindtap="deleteSelected">删除选中</button>
-    <button bindtap="exportSelected">导出选中</button>
-  </view>
-
   <!-- 咨询记录列表 -->
   <view class="list">
     <block wx:for="{{consultationList}}" wx:key="id">
-      <view class="card">
-        <!-- 勾选框 -->
-        <checkbox
-          class="checkbox"
-          value="{{item.id}}"
-          checked="{{item.checked}}"
-          bindtap="toggleCheck"
-          data-id="{{item.id}}"
-        ></checkbox>
+      <view class="card" bindtap="handleCardTap" data-id="{{item.id}}">
         <!-- 记录内容 -->
         <view class="card-content">
           <text class="name">{{item.name}}</text>

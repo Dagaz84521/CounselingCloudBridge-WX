@@ -16,6 +16,6 @@ App({
   globalData: {
     userInfo: null,
     isLoggedIn: false,
-    host : 'http://localhost:8080'
+    host : 'http://60.204.220.253:8080'
   }
 })

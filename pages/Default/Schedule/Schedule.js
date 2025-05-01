@@ -1,5 +1,6 @@
 // pages/Default/Schedule/Schedule.js
 const app = getApp();
+// 防抖函数（新增）
 Page({
   data: {
     searchKeyword: '',
@@ -12,6 +13,14 @@ Page({
     noMoreData: false
   },
 
+  debounce(fn, delay) {
+    let timer = null;
+    return function (...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn.apply(this, args), delay);
+    };
+  },
+
   // 导航到咨询师详情页
   navToCounselorDetail(e) {
     const counselorId = e.currentTarget.dataset.id;
@@ -21,10 +30,12 @@ Page({
   },
 
   onLoad(options) {
+    // 绑定防抖搜索方法（新增）
+    this.debouncedSearch = this.debounce(this.performSearch, 500);
     this.loadTherapists();
   },
 
-  // 加载咨询师数据
+  // 加载咨询师数据（优化）
   loadTherapists() {
     if (this.data.loading || this.data.noMoreData) return;
     
@@ -41,51 +52,67 @@ Page({
         'content-type': 'application/json'
       },
       data: {
-        name: searchKeyword || '', // 必填，空字符串代替undefined
-        sortord: sortType === '' ? '' : sortType, // 必填，默认传空字符串
+        name: searchKeyword || '',
+        sortord: sortType === '' ? '' : sortType,
         isFree: activeStatus === 'all' ? 2 : 
-               (activeStatus === 'free' ? 1 : 0), // 严格按文档映射
+               (activeStatus === 'free' ? 1 : 0),
         page: page,
-        pagesize: pagesize // 修正参数名拼写
+        pagesize: pagesize  // 修正参数名
       },
       success: (res) => {
         if (res.data.code === 1) {
-          const newData = res.data?.data || []; // 注意数据结构变化
+          const newData = res.data?.data || [];
           newData.forEach(counselor => {
             wx.setStorageSync(`counselor_${counselor.counselorId}`, counselor);
           });
-          const Therapists = page === 1 ? newData : [...this.data.therapists, ...newData];
-          console.log(res.data);
+          
+          // 优化数据合并逻辑（修改）
+          const mergedData = page === 1 ? newData : [...this.data.therapists, ...newData];
+          
           this.setData({
-            therapists: Therapists,
+            therapists: mergedData,
             noMoreData: newData.length < pagesize
           });
         } else {
-          wx.showToast({
-            title: res.data.msg || '加载失败', // 显示后端返回的错误信息
-            icon: 'none'
-          });
+          wx.showToast({ title: res.data.msg || '加载失败', icon: 'none' });
         }
       },
       fail: (err) => {
-        wx.showToast({
-          title: err.errMsg || '网络错误',
-          icon: 'none'
-        });
-        this.setData({ loading: false });
+        wx.showToast({ title: err.errMsg || '网络错误', icon: 'none' });
       },
       complete: () => {
         wx.stopPullDownRefresh();
-        this.setData({loading: false});
+        this.setData({ loading: false });
       }
     });
   },
 
+
   // 搜索处理
+  // 搜索处理（优化）
   handleSearch(e) {
+    this.debouncedSearch(e.detail.value);  // 使用防抖方法
+  },
+
+  // 实际执行搜索（新增）
+  performSearch(value) {
+    this.setData({
+      searchKeyword: value,
+      page: 1,
+      therapists: [],       // 清空旧数据
+      noMoreData: false     // 重置加载状态
+    }, () => {
+      this.loadTherapists();
+    });
+  },
+
+  // 清空搜索（优化）
+  clearSearch() {
     this.setData({ 
-      searchKeyword: e.detail.value,
-      page: 1
+      searchKeyword: '',
+      page: 1,
+      therapists: [],
+      noMoreData: false
     }, () => {
       this.loadTherapists();
     });
