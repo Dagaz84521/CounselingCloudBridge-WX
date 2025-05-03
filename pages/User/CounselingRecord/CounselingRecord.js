@@ -10,13 +10,11 @@ Page({
     console.log('thisUserId', thisUserId);
     wx.request({
      
-      url: host + '/api/client/session/getAll',
-      method: 'POST',
+      url: host + '/api/client/session/getAll?userId=' + thisUserId,
+      method: 'GET',
       header:{
-        token : wx.getStorageSync('token'),
-        'content-type': 'application/x-www-form-urlencoded' 
+        token : wx.getStorageSync('token') 
       },
-      data:'userId=' + thisUserId,
       success: (res) =>{
         console.log('API响应', res.data);
         if(res.data.code === 1){
