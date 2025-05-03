@@ -3,7 +3,7 @@
   <!-- 用户信息区域 -->
   <block wx:if="{{isLoggedIn}}">
     <view class="user-header" bindtap="handleTapInformation">
-      <image class="avatar" src="/images/用户.png"></image>
+      <image class="avatar" src="{{UserInfo.avatarUrl}}"></image>
       <text class="nickname">{{UserInfo.realName}}</text>
     </view>
   </block>
