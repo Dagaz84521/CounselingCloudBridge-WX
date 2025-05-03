@@ -8,6 +8,7 @@ Page({
   data: {
     sessionId: 0,
     userId: 0,
+    advice: '',
     currentConsultant:{
       realName:'',
       avatarUrl:''
@@ -55,18 +56,27 @@ Page({
         if (res.data.code === 1) {
           if(res.data.data === null)
             return;
-          const historyMessages = res.data.data.map(msg => ({
+            console.log(res.data.data);
+            const advice = res.data.data.advice === null ? '咨询师未给出建议' : res.data.data.advice;
+            if(res.data.data.records === null){
+              this.setData({
+                advice: advice
+              });
+              wx.showToast({ title: '无历史记录', icon: 'none' });
+            }
+            const historyMessages = res.data.data.records.map(msg => ({
             id: sessionId,
             content: msg.content,
             senderId: msg.senderId,
             isUser: msg.senderId === this.data.userId, // 根据senderId判断是否用户消息
-            time: this.formatTime(new Date(msg.createdAt))
+            time: this.formatTime(new Date(msg.createdAt)),
           }));
           
           // 按时间排序（假设后端返回的是倒序）
           const sortedMessages = historyMessages.reverse();
           console.log(sortedMessages);
           this.setData({
+            advice: advice,
             messages: sortedMessages
           });
         } else {
