@@ -20,7 +20,6 @@
       <view class="status-filter">
         <text class="filter-tag {{activeStatus === 'all' ? 'active' : ''}}" bindtap="filterByStatus" data-status="all">全部</text>
         <text class="filter-tag {{activeStatus === 'free' ? 'active' : ''}}" bindtap="filterByStatus" data-status="free">空闲</text>
-        <text class="filter-tag {{activeStatus === 'busy' ? 'active' : ''}}" bindtap="filterByStatus" data-status="busy">忙碌</text>
       </view>
     </view>
   </view>

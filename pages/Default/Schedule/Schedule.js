@@ -139,16 +139,18 @@ Page({
     });
   },
 
-  // 状态过滤
-  filterByStatus(e) {
-    const status = e.currentTarget.dataset.status;
-    this.setData({ 
-      activeStatus: status,
-      page: 1
-    });
-    console.log('setData');
+// 状态过滤
+filterByStatus(e) {
+  const status = e.currentTarget.dataset.status;
+  this.setData({ 
+    activeStatus: status,
+    page: 1,
+    therapists: [],       // 清空旧数据
+    noMoreData: false     // 重置加载状态
+  }, () => {  // 这里修正了语法错误
     this.loadTherapists();
-  },
+  });
+},
 
   // 下拉刷新
   onPullDownRefresh() {
