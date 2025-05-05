@@ -60,11 +60,12 @@ Page({
       },
       success: (res) => {
         if (res.data.code === 1 && res.data.data) {
-          const historyMessages = res.data.data.map(msg => ({
+          const data = res.data.data || [];
+          const historyMessages = data.map(msg => ({
             id: sessionId,
             content: msg.content,
             senderId: msg.senderId,
-            isUser: msg.senderId === this.data.userId, // 根据senderId判断是否用户消息
+            isUser: msg.senderId === this.data.userId,
             time: this.formatTime(new Date(msg.createdAt))
           }));
           

@@ -54,43 +54,84 @@ Page({
   },
 
   // 确认继续咨询
-  handleConfirm: function() {
+  handleConfirm: async function() {
     if (!this.data.hasAgreed) return;
-    
-    this.setData({ showAgreement: false });
-    const token = wx.getStorageSync('token');
-    const clientId = wx.getStorageSync('userInfo').userId;
-    console.log(clientId);
-    const counselorId = this.data.counselor.counselorId;
-    console.log(counselorId);
-    var sessionId = 0;
-    wx.request({
-      url: host + '/api/client/session/add',
-      method: 'POST',
-      header:{
-        'token': token,
-        'content-type': 'application/x-www-form-urlencoded' 
-      },
-      data: `clientId=${clientId}&counselorId=${counselorId}`,
-      success: async(res) =>{
-        console.log(res.data);
-        //实际应该跳转到咨询页面
-        wx.setStorageSync('currentSessionId', res.data.data);
-        wx.setStorageSync('currentCounselorId', counselorId);
-        sessionId = res.data.data;
-        wx.switchTab({
-          url: `/pages/Counseling/Index/Counseling_Index?sessionId=${sessionId}?counselorId=${counselorId}`,
+  
+    const token = wx.getStorageSync('token'); // 提前获取 token
+    const userInfo = wx.getStorageSync('userInfo');
+  
+    // 先检查是否存在会话
+    const checkSession = () => new Promise((resolve, reject) => {
+      wx.request({
+        url: app.globalData.host + '/api/client/session',
+        method: 'GET',
+        header: { 'token': token },
+        success: (res) => {
+          if (res.data.code === 1) {
+            resolve(res.data.data); // 返回会话数据
+          } else {
+            reject(res.data.msg);
+          }
+        },
+        fail: (err) => reject('网络异常，请重试')
+      });
+    });
+  
+    try {
+      // 等待检查结果
+      const existingSession = await checkSession();
+      
+      if (existingSession) {
+        wx.showToast({
+          title: '当前已存在咨询，请先结束当前会话',
+          icon: 'none',
+          duration: 3000
         });
+        return; // 存在会话则终止流程
       }
-    })
-    
-    // 这里可以跳转到后续流程
-    // wx.showToast({
-    //   title: '开始咨询流程',
-    //   icon: 'none'
-    
-    
-    // });
+  
+      // 不存在会话时继续创建
+      const counselorId = this.data.counselor.counselorId;
+      const clientId = userInfo.userId;
+      
+      const createSession = () => new Promise((resolve, reject) => {
+        wx.request({
+          url: host + '/api/client/session/add',
+          method: 'POST',
+          header: {
+            'token': token,
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          data: `clientId=${clientId}&counselorId=${counselorId}`,
+          success: (res) => {
+            if (res.data.code === 1) {
+              resolve(res.data.data); // 返回 sessionId
+            } else {
+              reject(res.data.msg);
+            }
+          },
+          fail: (err) => reject('创建会话失败')
+        });
+      });
+  
+      const sessionId = await createSession();
+      
+      // 存储并跳转
+      wx.setStorageSync('currentSessionId', sessionId);
+      wx.setStorageSync('currentCounselorId', counselorId);
+      wx.switchTab({
+        url: `/pages/Counseling/Index/Counseling_Index?sessionId=${sessionId}&counselorId=${counselorId}`
+      });
+  
+    } catch (error) {
+      wx.showToast({
+        title: typeof error === 'string' ? error : '操作失败',
+        icon: 'none',
+        duration: 3000
+      });
+    } finally {
+      this.setData({ showAgreement: false });
+    }
   },
 
   /**
