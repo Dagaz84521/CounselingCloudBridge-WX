@@ -61,36 +61,11 @@ Page({
   // 获取验证码
   getVerificationCode() {
     if (!this.data.canGetCode || this.data.isCountingDown) return;
-    
-    // 调用获取验证码API
-    wx.request({
-      url: 'https://your-api-domain.com/auth/send-code',
-      method: 'POST',
-      data: {
-        phone: this.data.formData.phone,
-        type: 'register' // 验证码类型，根据业务需求调整
-      },
-      success: (res) => {
-        if (res.data.code === 0) {
-          wx.showToast({
-            title: '验证码已发送',
-            icon: 'success'
-          });
-          this.startCountdown();
-        } else {
-          wx.showToast({
-            title: res.data.message || '验证码发送失败',
-            icon: 'none'
-          });
-        }
-      },
-      fail: (err) => {
-        wx.showToast({
-          title: '网络错误，请重试',
-          icon: 'none'
-        });
-      }
+    wx.showToast({
+      title: '验证码是123456',
+      icon: 'success'
     });
+    this.startCountdown();
   },
 
   // 开始倒计时
@@ -174,7 +149,7 @@ Page({
     
     this.setData({ isSubmitting: true });
     
-    console.log(gender)
+    console.log(avatar_url)
 
     // 调用注册API
     wx.request({
