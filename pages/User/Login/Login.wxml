@@ -32,13 +32,4 @@
         <text class="link-text" bindtap="handleRegister">注册账号</text>
       </view>
     </view>
-
-    <!-- 第三方登录 -->
-    <view class="third-party">
-      <text class="divider">其他登录方式</text>
-      <button class="wechat-btn" bindtap="getUserProfile">
-        <image class="wechat-icon" src="/icons/wechat.png"></image>
-        微信登录
-      </button>
-    </view>
 </view>

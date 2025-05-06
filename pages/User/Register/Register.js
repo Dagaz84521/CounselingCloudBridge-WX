@@ -12,7 +12,7 @@ Page({
       profession: '',    // 职业
       password: '',      // 密码
       confirmPassword: '', // 新增字段
-      avatar_url:'/images/用户.png'
+      avatar_url:'https://cdn.jsdelivr.net/gh/Dagaz84521/DagazBlogPicture@main/img/user.jpg'
     },
     isCountingDown: false,
     countdown: 0,
