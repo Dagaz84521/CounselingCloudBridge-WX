@@ -31,7 +31,7 @@
       />
       <button
         class="get-code-btn"
-        bindtap="getVerificationCode"
+        bindtap="sendSmsCode"
         disabled="{{isCodeButtonDisabled}}"
       >
         {{codeButtonText}}

@@ -11,7 +11,7 @@ Page({
     verificationCode: '', // 验证码
     isCodeButtonDisabled: false, // 验证码按钮是否禁用
     codeButtonText: '获取验证码', // 验证码按钮文字
-    countdown: 60 // 倒计时
+    countdown: 0 // 倒计时
   },
 
   /**
@@ -44,41 +44,13 @@ Page({
   },
 
   // 获取验证码
-  getVerificationCode: function() {
-    const { newPhone } = this.data;
-
-    if (!newPhone || !/^1[3456789]\d{9}$/.test(newPhone)) {
-      wx.showToast({
-        title: '请输入有效的手机号',
-        icon: 'none'
-      });
-      return;
-    }
-
-    // 调用接口发送验证码
-    wx.request({
-      url: '', // 替换为你的接口地址
-      method: 'POST',
-      data: {
-        phone: newPhone
-      },
-      success: (res) => {
-        if (res.statusCode === 200) {
-          wx.showToast({
-            title: '验证码已发送',
-            icon: 'success'
-          });
-
-          // 开始倒计时
-          this.startCountdown();
-        } else {
-          wx.showToast({
-            title: '发送验证码失败',
-            icon: 'none'
-          });
-        }
-      }
-    });
+  sendSmsCode() {
+    if (this.data.countdown > 0) return
+    
+    wx.showToast({
+      title: '验证码已发送',
+    })
+    this.startCountdown();
   },
 
   // 开始倒计时
